@@ -1,0 +1,12 @@
+**/bin/
+**/obj/
+**/*.csproj.user
+**/*.suo
+.vs/
+.vscode/
+.git/
+.gitignore
+.dockerignore
+README.md
+Dockerfile*
+*.md

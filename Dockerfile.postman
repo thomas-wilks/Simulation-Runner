@@ -1,0 +1,11 @@
+# Use the official Postman Docker image as the base image
+FROM postman/newman:alpine
+
+# Copy your Postman collection and environment files to the container
+COPY simulate.postman_collection.json /etc/newman/collection.json
+
+WORKDIR /etc/newman
+
+ENTRYPOINT ["newman"]
+
+CMD ["run", "collection.json"]

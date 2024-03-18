@@ -1,0 +1,22 @@
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /
+
+# copy csproj and restore as distinct layers
+COPY worker/Simulate.FostersAndPartners.Worker.csproj ./worker/
+COPY lib/Simulate.FostersAndPartners.Shared.csproj ./lib/
+WORKDIR /worker/
+RUN dotnet restore
+
+FROM build AS publish
+# copy everything else and build app
+COPY worker/. ./worker/
+COPY lib/. ./lib/
+WORKDIR /worker
+RUN dotnet publish -c release -o /app
+
+# final stage/image
+FROM publish AS final
+WORKDIR /app
+COPY --from=publish /app ./
+ENTRYPOINT ["dotnet", "Simulate.FostersAndPartners.Worker.dll"]

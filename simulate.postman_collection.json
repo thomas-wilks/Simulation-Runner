@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "40544e69-1446-4b50-9a05-d9cbdff21d84",
+		"name": "Fosters + Partners",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21222018"
+	},
+	"item": [
+		{
+			"name": "Get Simulation Status - Non ObjectId Failure",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/simulate/fdgkldfgklj/status",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"simulate",
+						"fdgkldfgklj",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Simulation Status - Not Found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/simulate/65f6e85b5a60a7ac0f3a0f56/status",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"simulate",
+						"65f6e85b5a60a7ac0f3a0f56",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Simulation Result - Non ObjectId Failure",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/simulate/jkhsfdgjkhfdg/result",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"simulate",
+						"jkhsfdgjkhfdg",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Simulation Result - Not Found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/simulate/65f6e85b5a60a7ac0f3a0f56/Result",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"simulate",
+						"65f6e85b5a60a7ac0f3a0f56",
+						"Result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request Queue Simulation - Bad Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"priority\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/simulate",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"simulate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request Queue Simulation - Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned id is not null and of type string\", function () {",
+							"    var jsonResponse = pm.response.json();",
+							"    pm.expect(jsonResponse.id).to.be.a('string').and.to.not.be.null;",
+							"});",
+							"",
+							"// Save the id from the response in an environment or global variable",
+							"var id = pm.response.json().id;",
+							"pm.environment.set(\"simId\", id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"priority\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/simulate",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"simulate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Simulation Status - Started",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned id is not null and of type string\", function () {",
+							"    var jsonResponse = pm.response.json();",
+							"    pm.expect(jsonResponse.status).to.be.a('string').and.to.not.eq(\"Completed\");",
+							"});",
+							"",
+							"// Delay to allow Async work to complete",
+							"setTimeout(() => {}, 30000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/simulate/{{simId}}/status",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"simulate",
+						"{{simId}}",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Simulation Status - Completed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned id is not null and of type string\", function () {",
+							"    var jsonResponse = pm.response.json();",
+							"    pm.expect(jsonResponse.status).to.be.a('string').and.to.eq(\"Completed\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/simulate/{{simId}}/status",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"simulate",
+						"{{simId}}",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Simulation Result - Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned id is not null and of type string\", function () {",
+							"    var jsonResponse = pm.response.json();",
+							"    var simId = pm.environment.get(\"simId\");",
+							"    pm.expect(jsonResponse.result).to.be.a('string').and.to.eq(`dummy result - ${simId}`);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/simulate/{{simId}}/Result",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"simulate",
+						"{{simId}}",
+						"Result"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
